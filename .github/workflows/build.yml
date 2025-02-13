@@ -1,0 +1,59 @@
+name: Package with Electron Packager
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16' # Или вашу версию Node.js
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Package with Electron Packager
+      run: npm run package # Выполняет скрипт "package" из package.json
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: packaged-app
+        path: dist/ # Путь к выходной папке electron-packager
+
+    - name: Create Release
+      if: github.ref == 'refs/heads/main'
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Release v${{ github.run_number }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      if: github.ref == 'refs/heads/main'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: dist/*  # Загружаем все содержимое папки dist
+        asset_name: ToDoList-Windows-${{ github.run_number }}.zip # Имя архива
+        asset_content_type: application/zip # Тип контента архива
+
+    - name: Zip the packaged app
+      run: |
+        Compress-Archive -Path dist/* -DestinationPath ToDoList-Windows-${{ github.run_number }}.zip
+        Move-Item -Path "ToDoList-Windows-${{ github.run_number }}.zip" -Destination dist/

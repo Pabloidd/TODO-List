@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<article id="content">
+    <header>
+        <h2>ToDo List</h2>
+        <button id="export-button">Export</button>
+        <button id="import-button">Import</button>
+        <button id="sort-button">Sort</button>
+        <button id="add-task-button">Add task</button>
+        <button id="close-app-button">exit</button>
+        <div id="add-task-window" class="pop-up-window">
+            <form id="make-task-form">
+                <label for="nameInput">Название</label>
+                <input type="text" id="nameInput" name="name" placeholder="Название задачи">
+
+                <label for="descriptionInput">Описание</label>
+                <input type="text" id="descriptionInput" name="description" placeholder="Описание задачи">
+
+                <label for="priorityInput">Приоритет(1,2,3)</label>
+                <input type="number" id="priorityInput" name="priority" placeholder="Приоритет (1-3)">
+
+                <label for="deadLineInput">Дедлайн</label>
+                <input type="text" id="deadLineInput" name="deadLine" placeholder="ГГГГ.ММ.ДД">
+
+                <div class="buttons-container-in-pop-up">
+                    <button type="submit" id="save-task-button">Сохранить</button>
+                    <button id="close-add-task-button">Отменить</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <section id="work-area">
+        <div id="show-task-window"></div>
+
+        <div id="edit-task-window" class="pop-up-window">
+            <form id="new-make-task-form">
+                <label for="new-nameInput">Название</label>
+                <input type="text" id="new-nameInput" name="name" placeholder="Название задачи">
+
+                <label for="new-descriptionInput">Описание</label>
+                <input type="text" id="new-descriptionInput" name="description" placeholder="Описание задачи">
+
+                <label for="new-priorityInput">Приоритет(1,2,3)</label>
+                <input type="number" id="new-priorityInput" name="priority" placeholder="Приоритет (1-3)">
+
+                <label for="new-deadLineInput">Дедлайн</label>
+                <input type="text" id="new-deadLineInput" name="deadLine" placeholder="ГГГГ.ММ.ДД">
+
+                <div class="buttons-container-in-pop-up">
+                    <button type="submit" id="new-save-task-button">Сохранить</button>
+                    <button id="new-close-add-task-button">Отменить</button>
+                </div>
+            </form>
+        </div>
+        <div id="tasks-container"></div>
+    </section>
+
+    <div id="sort-options-window" class="pop-up-window">
+        <button id="sort-by-name">По имени</button>
+        <button id="sort-by-priority">По приоритету</button>
+        <button id="sort-by-deadline">По дедлайну</button>
+        <button id="close-sort-options">Закрыть</button>
+    </div>
+
+</article>
+<script src="script.js"></script>
+</body>
+</html>
+
+

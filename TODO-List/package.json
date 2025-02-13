@@ -1,0 +1,16 @@
+{
+  "name": "ToDo-List",
+  "version": "1.0.0",
+  "description": "todo list",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager . ToDo-List --platform=win32 --arch=x64 --out=dist --icon=build/icon.ico --asar"
+  },
+    "author": "Pabloidd",
+    "license": "MIT",
+    "devDependencies": {
+      "electron": "^25.0.0",
+      "electron-packager": "^17.1.2"
+    }
+}
